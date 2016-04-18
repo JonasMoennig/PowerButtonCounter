@@ -37,7 +37,7 @@ public class UpdateService extends Service {
         } else {
             if(System.currentTimeMillis() - time < 1500){
                 Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-                vibrator.vibrate(100);
+                vibrator.vibrate(new long[] {0, 100}, -1);
                 Storage.getInstance(this).increment();
             }
             time = 0;
