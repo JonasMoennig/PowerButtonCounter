@@ -15,6 +15,7 @@ import android.util.Log;
 public class UpdateService extends Service {
 
     private static long time = 0;
+    private BroadcastReceiver mReceiver;
 
     @Override
     public void onCreate() {
@@ -22,7 +23,7 @@ public class UpdateService extends Service {
         // register receiver that handles screen on and screen off logic
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
-        BroadcastReceiver mReceiver = new PowerButtonReceiver();
+        mReceiver = new PowerButtonReceiver();
         registerReceiver(mReceiver, filter);
     }
 
@@ -42,6 +43,11 @@ public class UpdateService extends Service {
             time = 0;
         }
         return super.onStartCommand(intent,flags,startId);
+    }
+
+    @Override
+    public void onDestroy(){
+       unregisterReceiver(mReceiver);
     }
 
     @Nullable
