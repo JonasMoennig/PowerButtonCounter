@@ -32,11 +32,12 @@ public class UpdateService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         boolean screenOn = intent.getBooleanExtra("screen_state", false);
+        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         if (!screenOn) {
             time = System.currentTimeMillis();
+            vibrator.cancel();
         } else {
             if(System.currentTimeMillis() - time < 1500){
-                Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                 vibrator.vibrate(100);
                 Storage.getInstance(this).increment();
             }
