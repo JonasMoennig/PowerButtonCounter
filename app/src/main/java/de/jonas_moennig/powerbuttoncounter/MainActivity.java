@@ -39,6 +39,11 @@ public class MainActivity extends AppCompatActivity {
         update();
     }
 
+    public void decrement(View view){
+        Storage.getInstance(this).decrement();
+        update();
+    }
+
     public void stop(View view){
         stopService(new Intent(this, UpdateService.class));
         finish();

@@ -53,6 +53,13 @@ public class Storage extends SQLiteOpenHelper{
         db.update("count", contentValues, null, null);
     }
 
+    public void decrement(){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("_id", 0);
+        contentValues.put("count", getCount() - 1);
+        db.update("count", contentValues, null, null);
+    }
     public void reset(){
         SQLiteDatabase db = getWritableDatabase();
 
