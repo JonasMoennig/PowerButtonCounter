@@ -1,9 +1,12 @@
 package de.jonas_moennig.powerbuttoncounter;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -27,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void update(){
         ((TextView) findViewById(R.id.count)).setText(Integer.toString(Storage.getInstance(this).getCount()));
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle("PowerButtonCounter läuft")
+                .setContentText("Count: " + Storage.getInstance(this).getCount());
+        mNotificationManager.notify(UpdateService.mId, mNotifyBuilder.build());
     }
 
     public void reset(View view){
