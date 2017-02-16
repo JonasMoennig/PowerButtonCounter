@@ -1,5 +1,6 @@
 package de.jonas_moennig.powerbuttoncounter;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
+                .setVisibility(Notification.VISIBILITY_SECRET)
+                .setPriority(NotificationCompat.PRIORITY_MIN)
                 .setContentTitle("PowerButtonCounter läuft")
                 .setContentText("Count: " + Storage.getInstance(this).getCount());
         mNotificationManager.notify(UpdateService.mId, mNotifyBuilder.build());

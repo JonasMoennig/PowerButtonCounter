@@ -1,5 +1,6 @@
 package de.jonas_moennig.powerbuttoncounter;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -34,6 +35,8 @@ public class UpdateService extends Service {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.mipmap.ic_launcher)
+                        .setVisibility(Notification.VISIBILITY_SECRET)
+                        .setPriority(NotificationCompat.PRIORITY_MIN)
                         .setContentTitle("PowerButtonCounter läuft")
                         .setContentText("Count: " + Storage.getInstance(this).getCount());
 
@@ -55,6 +58,10 @@ public class UpdateService extends Service {
                 NotificationManager mNotificationManager =
                         (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(this)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setVisibility(Notification.VISIBILITY_SECRET)
+                        .setPriority(NotificationCompat.PRIORITY_MIN)
+                        .setContentTitle("PowerButtonCounter läuft")
                         .setContentText("Count: " + Storage.getInstance(this).getCount());
                 mNotificationManager.notify(mId, mNotifyBuilder.build());
             }
